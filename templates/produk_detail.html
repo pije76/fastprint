@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Produk Detail: {{ produk.nama_produk }}
+{% endblock title %}
+
+{% block content %}
+<div class="text-center">
+
+    <p> <b>Produk Name</b>: {{ produk.nama_produk }} | <a href="{% url 'produks:produk_update' produk.id_produk %}">Update</a> |
+    <a href="{% url 'produks:produk_delete' produk.id_produk %}" class="confirmation">Delete</a>
+</p>
+<p> <b>Kategori Produk</b>: {{ produk.kategori }} </p>
+<p> <b>Harga Produk</b>: Rp. {{ produk.harga }},- </p>
+<p> <b>Status Produk</b>: {{ produk.status }} </p>
+<p> <a href="{% url 'produks:produk_list' %}">View All Produks</a></p>
+</div>
+{% endblock content %}
+{% block scripts %}
+<script>
+$(document).ready(function()
+{
+    $('.confirmation').on('click', function()
+    {
+        return confirm('Are you sure want to delete?');
+    });
+})
+</script>
+{% endblock scripts %}

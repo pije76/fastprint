@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load render_table from django_tables2 %}
+
+{% block title %}
+Produk List
+{% endblock title %}
+
+{% block heading %}
+<h3>Produk List</h3>
+{% endblock heading %}
+
+{% block content %}
+<div class="text-center">
+<p> <a href="{% url 'produks:get_produk' %}"> + Ambil Data Produk</a></p>
+<p> <a href="{% url 'produks:produk_create' %}"> + Tambah Produk</a></p>
+<p> <a href="/api/"> + API</a></p>
+
+<table>
+    <tr>
+        <th>ID Produk</th>
+        <th>Nama Produk</th>
+        <th>Harga</th>
+        <th>Kategori</th>
+        <th>Status</th>
+    </tr>
+    {% for item in produks %}
+    <tr>
+        <td>{{ item.id_produk }}</td>
+        <td>
+            <a href="{% url 'produks:produk_detail' item.id_produk %}">{{ item.nama_produk }}</a>
+        </td>
+        <td>{{ item.harga }}</td>
+        <td>{{ item.kategori }}</td>
+        <td>{{ item.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+
+{% endblock content %}
+
