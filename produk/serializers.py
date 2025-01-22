@@ -10,7 +10,6 @@ class ProdukSerializer(serializers.ModelSerializer):
 		model = Produk
 		fields = ['id_produk', 'nama_produk', 'harga', 'kategori', 'status', 'detail']
 
-
 	def to_representation(self, instance):
 		rep = super().to_representation(instance)
 		rep['kategori'] = instance.kategori.nama_kategori

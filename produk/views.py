@@ -22,12 +22,6 @@ import json
 url = "https://recruitment.fastprint.co.id/tes/api_tes_programmer"
 
 # Create your views here.
-class ProductViewSet(viewsets.ModelViewSet):
-	get_status = Status.objects.get(nama_status='bisa dijual')
-	queryset = Produk.objects.filter(status=get_status.pk)
-	serializer_class = ProdukSerializer
-
-
 @csrf_exempt
 def get_produk(request):
 
@@ -75,7 +69,6 @@ def get_produk(request):
 					kategori=Kategori.objects.get(nama_kategori=kategori),
 					status=Status.objects.get(nama_status=status),
 				)
-				print(Kategori.objects.get(nama_kategori=kategori))
 
 			return redirect(reverse("produks:produk_list"))
 		else:
@@ -134,3 +127,8 @@ def produk_delete(request, pk):
 	produk_obj.delete()
 	return redirect(reverse("produks:produk_list"))
 
+
+class ProductViewSet(viewsets.ModelViewSet):
+	get_status = Status.objects.get(nama_status='bisa dijual')
+	queryset = Produk.objects.filter(status=get_status.pk)
+	serializer_class = ProdukSerializer
